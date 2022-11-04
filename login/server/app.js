@@ -129,14 +129,19 @@ app.post("/newsletter", async(req,res)=>{
     await subscriber.save();
     let mail = {subject: "Welcome :)", to:email, html:"Subscribed Successfully! "}
     await sendEmail(mail)
-    return res.status(200).send("<h1> Subscribed Successfully! </h1>")
-
+    return res.status(200).send("Subscribed Successfully!")
 
   } catch (error) {
     console.error(error);
         res.status(500).send("Internal server error")
   }
 })
+
+app.get("/newsletter",(req,res)=>{
+  res.sendFile(__dirname + "/newsletter.html" ) 
+
+})
+
 
 app.post("/contact", async(req,res)=>{  //contact us using message box
   try {
